@@ -26,8 +26,8 @@
             <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         @endif
     </head>
-    <body class="bg-[#f8f3d6] text-[#2C2C2C] flex justify-content items-center min-h-screen flex-col h-full w-full">
-        <header class="bg-[#FFD700] w-full text-[#2C2C2C] mb-1 shadow-lg">
+    <body class="bg-[#ffffff] text-[#2C2C2C] flex justify-content items-center min-h-screen flex-col h-full w-full">
+        <header class="bg-[#fab71c] w-full text-[#2C2C2C] mb-1 shadow-lg">
             @if (Route::has('login'))
             <nav class="navbar navbar-light px-4 d-flex justify-content-between align-items-center position-sticky sticky-nav">
                 <div class="d-flex align-items-center">
