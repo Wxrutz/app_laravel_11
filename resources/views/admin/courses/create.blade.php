@@ -11,26 +11,26 @@
                 <form method="POST" action="{{ route('admin.courses.store') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
-                            {{ __('Title') }}
+                        <label class="block text-gray-700 text font-bold mb-2" for="title">
+                            {{ __('ชื่อคอร์ส') }}
                         </label>
                         <input id="title" type="text" name="title" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
                     </div>
                     <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="description">
-                            {{ __('Description') }}
+                        <label class="block text-gray-700 text font-bold mb-2" for="description">
+                            {{ __('คำอธิบาย') }}
                         </label>
                         <textarea id="description" name="description" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
                     </div>
                     <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="thumbnail">
-                            {{ __('Thumbnail') }}
+                        <label class="block text-gray-700 text font-bold mb-2" for="thumbnail">
+                            {{ __('รูปปกคอร์ส') }}
                         </label>
                         <input id="thumbnail" type="file" name="thumbnail" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
                     </div>
                     <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="youtube_link">
-                            {{ __('YouTube Link') }}
+                        <label class="block text-gray-700  font-bold mb-2" for="youtube_link">
+                            {{ __('ลิงก์ YouTube') }}
                         </label>
                         <input id="youtube_link" type="text" name="youtube_link" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                     </div>
@@ -57,7 +57,7 @@
                         </div>
                     </div>
                     <button type="button" id="add-question" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Add Question</button>
-                    <div class="flex items-center justify-between">
+                    <div class="flex items-center justify-between mt-4">
                         <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                             {{ __('Create Course') }}
                         </button>

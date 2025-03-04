@@ -34,4 +34,5 @@ class Course extends Model
     {
         return $this->hasMany(Questions::class);
     }
+    
 }

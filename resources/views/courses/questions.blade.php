@@ -5,45 +5,52 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    <form action="{{ route('courses.submit', $course->id) }}" method="POST">
-                        @csrf
-                        @foreach ($course->questions as $question)
-                            <div class="mb-4">
-                                <p>{{ $question->question_text }}</p>
-                                <div>
-                                    <label>
-                                        <input type="radio" name="answers[{{ $question->id }}]" value="a">
-                                        {{ $question->option_a }}
-                                    </label>
-                                </div>
-                                <div>
-                                    <label>
-                                        <input type="radio" name="answers[{{ $question->id }}]" value="b">
-                                        {{ $question->option_b }}
-                                    </label>
-                                </div>
-                                <div>
-                                    <label>
-                                        <input type="radio" name="answers[{{ $question->id }}]" value="c">
-                                        {{ $question->option_c }}
-                                    </label>
-                                </div>
-                                <div>
-                                    <label>
-                                        <input type="radio" name="answers[{{ $question->id }}]" value="d">
-                                        {{ $question->option_d }}
-                                    </label>
-                                </div>
-                            </div>
-                        @endforeach
-                        <button type="submit" class="btn btn-primary">ส่งคำตอบ</button>
-                    </form>
+    <div class="py-12 flex justify-center">
+        <div class="w-full max-w-2xl bg-white p-6 rounded-lg shadow-md" x-data="quiz">
+
+            <form action="{{ route('courses.submit', $course->id) }}" method="POST">
+                @csrf
+                @foreach ($course->questions as $question)
+                    <div class="mb-6">
+                        <p class="font-semibold text-lg">{{ $question->question_text }}</p>
+                        <div class="space-y-2">
+                            @foreach (['a', 'b', 'c', 'd'] as $option)
+                                <label class="block cursor-pointer">
+                                    <input type="radio" name="answers[{{ $question->id }}]" value="{{ $option }}" 
+                                           class="hidden"
+                                           x-model="selectedAnswers[{{ $question->id }}]"
+                                           x-on:change="checkAnswer({{ $question->id }}, '{{ $option }}', '{{ $question->correct_option }}')">
+                                    <div class="p-3 border rounded-lg transition-all"
+                                         x-bind:class="{
+                                             'bg-green-200 border-green-600': selectedAnswers[{{ $question->id }}] === '{{ $option }}' && '{{ $option }}' === '{{ $question->correct_option }}',
+                                             'bg-red-200 border-red-600': selectedAnswers[{{ $question->id }}] === '{{ $option }}' && '{{ $option }}' !== '{{ $question->correct_option }}',
+                                             'hover:bg-gray-100': selectedAnswers[{{ $question->id }}] !== '{{ $option }}'
+                                         }">
+                                        {{ $question["option_".$option] }}
+                                    </div>
+                                </label>
+                            @endforeach
+                        </div>
+                    </div>
+                @endforeach
+
+                <div class="flex justify-end">
+                    <button type="submit" class="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700">
+                        Next >
+                    </button>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('quiz', () => ({
+                selectedAnswers: {},
+                checkAnswer(questionId, selectedOption, correctOption) {
+                    this.selectedAnswers[questionId] = selectedOption;
+                }
+            }));
+        });
+    </script>
 </x-app-layout>

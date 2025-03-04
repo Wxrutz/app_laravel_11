@@ -7,12 +7,11 @@ use App\Http\Controllers\User\AnswersController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\UserlistController;
 use App\Http\Controllers\Admin\CoursesController;
+use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\AdminDashboardController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -36,8 +35,8 @@ Route::middleware('auth', 'userMiddleware')->group(function () {
 //admin
 Route::middleware('auth', 'adminMiddleware')->group(function () {
 
-    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-
+    Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
     Route::get('admin/users', [UserlistController::class, 'index'])->name('admin.users');
     Route::get('/admin/users/{id}/edit', [UserlistController::class, 'edit'])->name('admin.users.edit');
